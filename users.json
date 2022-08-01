@@ -1,0 +1,23 @@
+[
+    {"c-Id": 1,
+    "username" : "PaddyLuvr99",
+    "psswrd": "Gary_99",
+    "nameF": "Spongebob",
+    "nameL": "Squarepants",
+    "email":"sudsMcSplashin@gmail.com"
+    },
+    {"c-Id": 2,
+    "username" : "ElBarto88",
+    "psswrd": "@yCarumba1",
+    "nameF": "Bort",
+    "nameL": "Simpson",
+    "email":"doTheBart-Man@hotmail.com"
+    },
+    {"c-Id": 3,
+    "username" : "M.Smith06",
+    "psswrd": "$howMeTheMorty!",
+    "nameF": "Morty",
+    "nameL": "Smith",
+    "email":"MortySmith@outlook.com"
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {"customerName": "Fred", "amount": 20.0},
+    {"customerName": "Tom", "amount": 20.0},
+    {"customerName": "Stacy", "amount": 20.0},
+    {"customerName": "Leah", "amount": 10.0},
+    {"customerName": "Fred", "amount": 10.0},
+    {"customerName": "Tom", "amount": 10.0},
+    {"customerName": "Stacy", "amount": 5.0},
+    {"customerName": "Stacy", "amount": 5.0},
+    {"customerName": "Leah", "amount": 5.0},
+    {"customerName": "Leah", "amount": 1.0}
+]
