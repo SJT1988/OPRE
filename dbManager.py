@@ -8,6 +8,11 @@ import helper
 
 class dbManager():
 
+    def __new__(cls):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(dbManager, cls).__new__(cls)
+        return cls.instance
+    
     def __init__(self):
 
         self._minerals_csv_file = 'RRUFF_Export_20220731_223900.csv'
@@ -124,14 +129,19 @@ class dbManager():
             logging.warning(f'SUCCESS: \{collectionName}\' collection has been overwitten.')       
         else:
             logging.warning(f'SUCCESS: \'{collectionName}\' collection has been created.')
+        helper.clearScreen()
         return
 
     #================================================================================
     #================================================================================
-    def assign_user_random_pet_rocks(self, userID, count=3):
+    # For a given user (identified by their 'userID' from the User collection),
+    # gives them 'quantity' randomly selected pet rocks. Running this outside of the
+    # __init__() method will compromise data integrity.
+    def assign_user_random_pet_rocks(self, userID, quantity=3):
         client = MongoClient()
         db = client.get_database('project01')
-        collection = db.Users
+        uCollection = db.Users
+        
         pass
 
     #================================================================================

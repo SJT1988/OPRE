@@ -1,7 +1,7 @@
-import helper, menu, dbManager
-import time
+from helper import helper
+import menu, dbManager
 from pymongo import MongoClient
-import json
+import time
 
 m = menu.MenuManager()
 dbm = dbManager.dbManager()
@@ -19,7 +19,7 @@ def main():
         if m.validate(answer, m.state['options']):
             m.state = m.states[m.state['options'][int(answer)-1][1]]
             time.sleep(1.0)
-            m.clearScreen()
+            helper.clearScreen()
             break
         else:
             print('\n'.join(["Type the number for one of the given options",
@@ -27,6 +27,6 @@ def main():
 
 if __name__ == '__main__':
     helper.clearScreen()
-    dbm.initialize_minerals_collection()
+    #dbm.initialize_minerals_collection()
     main()
 

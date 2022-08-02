@@ -3,6 +3,11 @@ import os
 # singleton class for handling various I/O functionality
 class MenuManager:
 
+    def __new__(cls):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(MenuManager, cls).__new__(cls)
+        return cls.instance
+
     def __init__(self):
         self.states = {
             'main menu': {

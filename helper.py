@@ -1,3 +1,5 @@
+import os
+
 # module containing helpful functions that could be used
 # across all or several modules
 
