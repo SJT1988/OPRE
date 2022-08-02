@@ -57,14 +57,3 @@ class MenuManager:
     # menu
     def menu(self):
         pass
-
-    # Function to clear the screen. Tests for operating system.
-    @staticmethod
-    def clearScreen():  
-        # Windows
-        if os.name == 'nt':
-            _ = os.system('cls')
-
-        # Mac, Linux(os.name is 'posix')
-        else:
-            _ = system('clear')

@@ -1,9 +1,10 @@
-import menu
+import helper, menu, dbManager
 import time
 from pymongo import MongoClient
 import json
 
 m = menu.MenuManager()
+dbm = dbManager.dbManager()
 
 def main():
     #m.menu_landing()
@@ -25,6 +26,7 @@ def main():
             "and press 'ENTER'."]))
 
 if __name__ == '__main__':
-    m.clearScreen()
+    helper.clearScreen()
+    dbm.initialize_minerals_collection()
     main()
 

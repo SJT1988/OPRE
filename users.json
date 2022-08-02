@@ -1,23 +1,26 @@
 [
-    {"c-Id": 1,
+    {"userId": 1,
     "username" : "PaddyLuvr99",
     "psswrd": "Gary_99",
     "nameF": "Spongebob",
     "nameL": "Squarepants",
-    "email":"sudsMcSplashin@gmail.com"
+    "email":"sudsMcSplashin@gmail.com",
+    "wallet": 2000.00
     },
-    {"c-Id": 2,
+    {"userId": 2,
     "username" : "ElBarto88",
     "psswrd": "@yCarumba1",
     "nameF": "Bort",
     "nameL": "Simpson",
-    "email":"doTheBart-Man@hotmail.com"
+    "email":"doTheBart-Man@hotmail.com",
+    "wallet": 5000.00
     },
-    {"c-Id": 3,
+    {"userId": 3,
     "username" : "M.Smith06",
     "psswrd": "$howMeTheMorty!",
     "nameF": "Morty",
     "nameL": "Smith",
-    "email":"MortySmith@outlook.com"
+    "email":"MortySmith@outlook.com",
+    "wallet": 3000.00
     }
 ]
