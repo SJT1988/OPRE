@@ -4,6 +4,7 @@ import os
 # across all or several modules
 
 class helper():
+    
     # Function to clear the screen. Tests for operating system.
     @staticmethod
     def clearScreen():  

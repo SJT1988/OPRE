@@ -1,23 +1,35 @@
 [
-    {"userId": 1,
+    {
+    "role" : "admin",
+    "username" : "Daedalus_88",
+    "password": "$uper-Secure64",
+    "nameF": "Spencer",
+    "nameL": "Trumbore",
+    "email":"spenceer250@revature.net",
+    "wallet": 0.00
+    },
+    {
+    "role" : "customer",
     "username" : "PaddyLuvr99",
-    "psswrd": "Gary_99",
+    "password": "Gary_99",
     "nameF": "Spongebob",
     "nameL": "Squarepants",
     "email":"sudsMcSplashin@gmail.com",
     "wallet": 2000.00
     },
-    {"userId": 2,
+    {
+    "role" : "customer",
     "username" : "ElBarto88",
-    "psswrd": "@yCarumba1",
+    "password": "@yCarumba1",
     "nameF": "Bort",
     "nameL": "Simpson",
     "email":"doTheBart-Man@hotmail.com",
     "wallet": 5000.00
     },
-    {"userId": 3,
+    {
+    "role" : "customer",
     "username" : "M.Smith06",
-    "psswrd": "$howMeTheMorty!",
+    "password": "$howMeTheMorty!",
     "nameF": "Morty",
     "nameL": "Smith",
     "email":"MortySmith@outlook.com",
