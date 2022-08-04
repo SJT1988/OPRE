@@ -66,6 +66,8 @@ class MenuManager:
     #================================================================================
     # validate input
     def validate(self, ans, opt) -> bool:
+        if not re.match('^[0-9]*$', ans):
+            return False
         if int(ans) in range(1,len(opt)+1):
             self.stateName = opt[int(ans)-1][1]
             return True
@@ -353,8 +355,20 @@ class MenuManager:
 
     #================================================================================
     #================================================================================
+    # logoff 'menu' (airquotes)
+    def logoff(self):
+        dbM.voidUserCredentials()
+        self.stateName = 'main menu'
+        self.state = self.states[self.stateName]
+        logging.info('Logging off...')
+        time.sleep(1)
+        h.clearScreen()
+        return
+
+    #================================================================================
+    #================================================================================
     # Change User Role menu
-    def ChangeUserRole(self):
+    def changeUserRole(self):
         
         #----------------------------------------------------------------------------
         def chooseUser() -> str:
@@ -419,9 +433,13 @@ class MenuManager:
             logging.debug('stateName = register')
             self.register()
 
+        if self.stateName == 'logoff':
+            logging.debug('stateName = logoff')
+            self.logoff()
+
         if self.stateName == 'change user role':
             logging.debug('stateName = change user role')
-            self.ChangeUserRole()
+            self.changeUserRole()
 
         if self.stateName == 'quit':
             logging.debug('stateName = quit')

@@ -19,6 +19,14 @@ class dbManager():
     _users_json_file = 'users.json'
 
     #================================================================================
+    #================================================================================
+    # Resets user credentials to None. Used when logging off.
+    @staticmethod
+    def voidUserCredentials():
+        dbManager._user_credentials = None
+        return
+        
+    #================================================================================
     #================================================================================ 
     # Generates the mineral collection, which is basically an inventory table for our
     # Pet Rock hustle. There are 5,830 real minerals in this collection. I added a
@@ -215,8 +223,9 @@ class dbManager():
     #================================================================================
     #================================================================================
     @staticmethod
-    def updateField(match_this: dict, set_this: dict, collectionName: str) -> int:
-        # result is a dict with 3 key-value pairs: acknowledged, matched count, modified count
+    def updateField(match_this: dict, set_this: dict, collectionName: str):
+
+        # result is the updated document or None if the document cannot be found.
         result = db[collectionName].find_one_and_update(match_this, {'$set': set_this})
         logging.debug(result)
         return result

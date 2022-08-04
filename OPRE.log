@@ -30,3 +30,12 @@ INFO :: 2022-08-04 07:08:55,662 -- successful login
 INFO :: 2022-08-04 07:08:55,662 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
 DEBUG :: 2022-08-04 07:09:04,976 -- stateName = change user role
 INFO :: 2022-08-04 07:09:24,672 -- Succesfully updated PaddyLuvr99's role to 'admin'.
+DEBUG :: 2022-08-04 08:05:04,879 -- stateName = login
+WARNING :: 2022-08-04 08:05:33,433 -- invalid password
+INFO :: 2022-08-04 08:05:34,447 -- failed login
+WARNING :: 2022-08-04 08:05:51,367 -- invalid username
+INFO :: 2022-08-04 08:05:52,382 -- failed login
+INFO :: 2022-08-04 08:06:22,855 -- successful login
+INFO :: 2022-08-04 08:06:22,855 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 08:06:33,786 -- stateName = logoff
+INFO :: 2022-08-04 08:06:33,787 -- Logging off...
