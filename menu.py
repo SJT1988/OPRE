@@ -39,7 +39,7 @@ class MenuManager:
                     ('Delete User', 'delete user'),
                     ('Change User Role', 'change user role'),
                     ('Delete Mineral', 'delete mineral'),
-                    ('New Mineral', 'append mineral'),
+                    ('Append Mineral', 'append mineral'),
                     ('Give Pet?', 'append pet'),
                     ('Take Pet!', 'delete pet'),
                     ('Account Options', 'admin options'),
@@ -360,8 +360,8 @@ class MenuManager:
         dbM.voidUserCredentials()
         self.stateName = 'main menu'
         self.state = self.states[self.stateName]
-        logging.info('Logging off...')
-        time.sleep(1)
+        print('Logging off...')
+        time.sleep(2)
         h.clearScreen()
         return
 
@@ -474,10 +474,100 @@ class MenuManager:
             h.clearScreen()
         
         return
-        
-        
-        
+
+    #================================================================================
+    #================================================================================
+    def appendMineral(self):
+        #----------------------------------------------------------------------------
+        class FormatError(Exception):
+            pass
+        #----------------------------------------------------------------------------
+        def new_name()->str:
+            name = None
+            while True:
+                try:
+                    name = input('Enter new mineral\'s name: >>> ')
+                    # check for invalid characters:
+                    for c in name:
+                        if c in '\/:;*?%\"\'<>|':
+                            raise FormatError
+                    break
+                except:
+                    logging.warning('Something went wrong. Try another name.')
+            time.sleep(1)
+            h.clearScreen()
+            return name
+        #----------------------------------------------------------------------------
+        def new_chemistry()->str:
+            chemistry = None
+            while True:
+                try:
+                    chemistry = input('Enter new mineral\'s chemistry\n(/\:;*?%\"\'<>| disallowed): >>> ')
+                    # check for invalid characters:
+                    for c in chemistry:
+                        if c in '/\:;*?%\"\'<>|':
+                            raise FormatError
+                    break
+                except:
+                    logging.warning('Something went wrong. Try another chemistry formula.')
+            time.sleep(1)
+            h.clearScreen()
+            return chemistry
+        #----------------------------------------------------------------------------
+        def new_country()->str:
+            country = None
+            while True:
+                try:
+                    country = input('Enter new mineral\'s country: >>> ')
+                    # check for invalid characters:
+                    for c in country:
+                        if c in '\/:;*?%\"\'<>|':
+                            raise FormatError
+                    break
+                except:
+                    logging.warning('Something went wrong. Try another country.')
+            time.sleep(1)
+            h.clearScreen()
+            return country
+        #----------------------------------------------------------------------------
+        def new_value()->float:
+            value = None
+            while True:
+                try:
+                    value = input('Enter new mineral\'s USD value. Commas will be ignored.\n(ex: 6, $1.00, 3., 0., 1.2): >>> ')
+                    value = value.strip(' $') # strip whitespace, dollar sign
+                    value_noCommas = value.replace(',','')
+                    # check for invalid characters:
+                    # regex check all character criteria:
+                    pattern = '^((?:\d)+(?:\.)?(?:\d){0,2})$|^((?:\d)*(?:\.)(?:\d){1,2})$'
+                    match = re.search(pattern, value_noCommas)
+                    if not match:
+                        raise FormatError
+                    fltVal = float(value_noCommas)
+                    break
+                except:
+                    logging.warning('Something went wrong. Try another value.')
+            time.sleep(1)
+            h.clearScreen()
+            return fltVal
+        #----------------------------------------------------------------------------
+        print('APPEND MINERAL')
+        print()
+        name = new_name()
+        chemistry = new_chemistry()
+        country = new_country()
+        value = new_value()
+        dbM.append_document({
+            'Name': name,
+            'Chemistry': chemistry,
+            'Country': country,
+            'Value': value
+        },
+        'Minerals')
+        self.stateName = 'admin menu'
+        self.state = self.states[self.stateName]
         time.sleep(1)
+        h.clearScreen()
         return
 
     #================================================================================
@@ -502,6 +592,10 @@ class MenuManager:
         if self.stateName == 'delete user':
             logging.debug('stateName = delete user')
             self.deleteUser()
+
+        if self.stateName == 'append mineral':
+            logging.debug('stateName = append mineral')
+            self.appendMineral()
 
         if self.stateName == 'quit':
             logging.debug('stateName = quit')

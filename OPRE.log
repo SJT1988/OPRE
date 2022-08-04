@@ -126,3 +126,41 @@ INFO :: 2022-08-04 12:37:03,053 -- successfully deleted Test_Self's document:
 DEBUG :: 2022-08-04 12:37:22,826 -- stateName = login
 WARNING :: 2022-08-04 12:37:29,581 -- invalid username
 INFO :: 2022-08-04 12:37:30,594 -- failed login
+DEBUG :: 2022-08-04 14:56:10,857 -- stateName = login
+INFO :: 2022-08-04 14:56:24,834 -- successful login
+INFO :: 2022-08-04 14:56:24,834 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 14:56:30,458 -- stateName = append mineral
+WARNING :: 2022-08-04 14:57:01,783 -- Something went wrong. Try another chemistry formula.
+WARNING :: 2022-08-04 15:23:24,962 -- Something went wrong. Try another chemistry formula.
+WARNING :: 2022-08-04 15:23:28,289 -- Something went wrong. Try another chemistry formula.
+WARNING :: 2022-08-04 15:24:28,921 -- Something went wrong. Try another chemistry formula.
+WARNING :: 2022-08-04 15:24:46,265 -- Something went wrong. Try another chemistry formula.
+WARNING :: 2022-08-04 15:25:50,553 -- Something went wrong. Try another chemistry formula.
+DEBUG :: 2022-08-04 15:26:08,539 -- stateName = login
+INFO :: 2022-08-04 15:26:24,188 -- successful login
+INFO :: 2022-08-04 15:26:24,188 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 15:26:29,420 -- stateName = append mineral
+WARNING :: 2022-08-04 15:26:59,785 -- Something went wrong. Try another country.
+DEBUG :: 2022-08-04 15:28:27,199 -- stateName = login
+INFO :: 2022-08-04 15:28:42,836 -- successful login
+INFO :: 2022-08-04 15:28:42,836 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 15:28:55,131 -- stateName = append mineral
+INFO :: 2022-08-04 15:29:42,288 -- SUCCESS: added document {'Name': 'Rockium', 'Chemistry': 'Fe·5', 'Country': 'Xenon', 'Value': 40.69, '_id': ObjectId('62ec48559461b233b9f263f8')} to collection Minerals.
+DEBUG :: 2022-08-04 15:29:42,294 -- stateName = append mineral
+DEBUG :: 2022-08-04 15:40:08,955 -- stateName = login
+INFO :: 2022-08-04 15:40:32,511 -- successful login
+INFO :: 2022-08-04 15:40:32,512 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 15:40:53,552 -- stateName = append mineral
+WARNING :: 2022-08-04 15:41:07,142 -- Something went wrong. Try another name.
+WARNING :: 2022-08-04 15:41:39,966 -- Something went wrong. Try another value.
+WARNING :: 2022-08-04 15:41:54,093 -- Something went wrong. Try another value.
+WARNING :: 2022-08-04 15:42:23,845 -- Something went wrong. Try another value.
+WARNING :: 2022-08-04 15:42:36,525 -- Something went wrong. Try another value.
+DEBUG :: 2022-08-04 15:49:38,917 -- stateName = login
+INFO :: 2022-08-04 15:50:05,063 -- successful login
+INFO :: 2022-08-04 15:50:05,063 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 15:50:13,201 -- stateName = append mineral
+WARNING :: 2022-08-04 15:50:36,596 -- Something went wrong. Try another value.
+INFO :: 2022-08-04 15:50:55,966 -- SUCCESS: added document {'Name': 'Rockium', 'Chemistry': '3452dfad', 'Country': 'xar arar', 'Value': 424.0, '_id': ObjectId('62ec4d4e7dfd2b597c7896a0')} to collection Minerals.
+DEBUG :: 2022-08-04 15:52:32,806 -- stateName = logoff
+INFO :: 2022-08-04 15:52:32,807 -- Logging off...
