@@ -1,4 +1,4 @@
-from helper import helper
+from helper import helper as h
 import logging
 import menu
 from dbM import dbManager as dbM
@@ -43,19 +43,18 @@ def main():
             if m.validate(answer, m.state['options']):
                 m.state = m.states[m.state['options'][int(answer)-1][1]]
                 time.sleep(1.0)
-                helper.clearScreen()
+                h.clearScreen()
             else:
                 print('\n'.join(["Type the number for one of the given options",
                 "and press 'ENTER'."]))
                 time.sleep(0.5)
-        helper.clearScreen()
+        h.clearScreen()
 
 if __name__ == '__main__':
     '''
     I don't have to run the following b.c. I have already initialized
     the Minerals collection:
     '''
-    # THIS IS AN EDIT
     #dbM.json_to_collection(dbM._users_json_file,'Users')
     #dbM.csv_to_minerals_collection()
     #helper.clearScreen()

@@ -1,9 +1,0 @@
-INFO :: 2022-08-02 20:22:25,801 -- stateName = login
-INFO :: 2022-08-02 20:22:44,486 -- successful login
-INFO :: 2022-08-02 20:22:44,486 -- successful login with credentials ('PaddyLuvr99', 'Gary_99', 'customer').
-INFO :: 2022-08-02 21:40:49,319 -- SUCCESS: \Users' collection has been overwitten.
-INFO :: 2022-08-02 21:40:54,616 -- SUCCESS: 'Minerals' collection has been overwitten.
-INFO :: 2022-08-02 21:41:34,961 -- stateName = quit
-INFO :: 2022-08-02 22:08:55,367 -- CANCELED: 'Users' collection will not be updated.
-INFO :: 2022-08-02 22:09:04,072 -- SUCCESS: 'Minerals' collection has been overwitten.
-INFO :: 2022-08-02 22:09:11,633 -- stateName = quit

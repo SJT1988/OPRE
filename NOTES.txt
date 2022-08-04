@@ -1,2 +1,8 @@
 Mineral Database downloaded from:
 https://rruff.info/ima/
+
+when commiting do
+
+git add .
+git commit -m '<write comment here>'
+git push

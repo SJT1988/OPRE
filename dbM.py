@@ -2,7 +2,7 @@ from asyncio.windows_events import NULL
 import csv, json, random, logging, time
 import menu
 from pymongo import MongoClient
-from helper import helper
+from helper import helper as h
 
 # Special thanks to RRUFF Project for making their database downloadable
 # in csv format
@@ -147,7 +147,7 @@ class dbManager():
             logging.info(f'SUCCESS: \'{collectionName}\' collection has been overwitten.')       
         else:
             logging.info(f'SUCCESS: \'{collectionName}\' collection has been created.')
-        helper.clearScreen()
+        h.clearScreen()
         return
 
     #================================================================================
@@ -186,5 +186,17 @@ class dbManager():
             logging.warning('invalid username')
             time.sleep(1)
         return False
-
     
+    #================================================================================
+    #================================================================================
+    @staticmethod
+    def append_document(document: dict, collectionName: str):
+        
+        try:
+            db[collectionName].insert_one(document)
+        except:
+            logging.error(f'FAILURE: document was not appended to {collectionName}.')
+        finally:
+            time.sleep(1)
+            h.clearScreen()
+        return

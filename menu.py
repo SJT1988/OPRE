@@ -1,6 +1,6 @@
-import logging, time
+import logging, time, re
 from dbM import dbManager as dbM
-from helper import helper
+from helper import helper as h
 # singleton class for handling various I/O functionality
 class MenuManager:
 
@@ -80,13 +80,6 @@ class MenuManager:
 
     #================================================================================
     #================================================================================
-    # HELPER Line formatting wrapper for center print formatting.
-    # Program width is 80 characters.
-    def printc(line):
-        print(line.center(80,' '))
-
-    #================================================================================
-    #================================================================================
     # landing menu ((UNUSED)
     def menu_landing(self):
         self.copyright()
@@ -139,6 +132,204 @@ class MenuManager:
                     pass
         return
 
+    #================================================================================
+    #================================================================================
+    # Registration menu
+    def register(self):
+        #----------------------------------------------------------------------------
+        class TooShortError(Exception):
+            pass
+        #----------------------------------------------------------------------------
+        class TooLongError(Exception):
+            pass
+        #----------------------------------------------------------------------------
+        class InvalidCharError(Exception):
+            pass
+        #----------------------------------------------------------------------------
+        class RegexFailError(Exception):
+            pass
+        #----------------------------------------------------------------------------
+        def getUsername() -> str:
+            while True:
+                print("REGISTRATION - Username")
+                print()
+                h.printl('Username format:\tUsernames must be between 8 and 20 characters long')
+                h.printl('and cannot contain any of the special characters \/:;*?%\"\'<>|')
+                icc = 0 #invalid character count
+
+                try:
+                    problems = 0            
+                    tryUsername = input('Enter new username >>> ')
+                    # check the length:
+                    if len(tryUsername) < 8:
+                        problems+=1
+                        raise TooShortError
+                    elif len(tryUsername) > 20:
+                        problems+=1
+                        raise TooLongError
+                    # check for invalid characters:
+                    for c in tryUsername:
+                        if c in '\/:;*?%\"\'<>|':
+                            icc+=1
+                    if icc > 0:
+                        problems+=1
+                        raise InvalidCharError
+                    # only return if no problems:
+                    if problems == 0:
+                        return tryUsername
+
+                except TooShortError:
+                    logging.info('your username is too short.\n')
+                except TooLongError:
+                    logging.info('your username is too long.\n')
+                except InvalidCharError:
+                    logging.info(f'your username contains {icc} invalid characters.')
+                finally:
+                    time.sleep(1)
+                h.clearScreen()
+        #----------------------------------------------------------------------------
+        def getPassword() -> str:
+            while True:
+                print("REGISTRATION - Password")
+                print()
+                h.printl('Password format:\tPasswords must be between 8 and 20 characters long,')
+                h.printl('contain both lower and uppercase characters, at least one digt,')
+                h.printl('at least one non-word character, and cannot contain any of')
+                h.printl('the non-word characters \/:;*?%\"\'<>|')
+
+                try:
+                    problems = 0            
+                    tryPassword = input('Enter new password >>> ')
+                    
+                    # check the length:
+                    if len(tryPassword) < 8:
+                        problems+=1
+                        raise TooShortError
+                    elif len(tryPassword) > 20:
+                        problems+=1
+                        raise TooLongError
+                    
+                    # regex check all character criteria:
+                    pattern = '(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*(\W|_))(^[^\/:;*?%\"\'<>|]+$)'
+                    match = re.search(pattern, tryPassword)
+                    if not match:
+                        problems+=1
+                        raise RegexFailError
+                    
+                    # only return if no problems
+                    if problems == 0:
+                        return tryPassword
+
+                except TooShortError:
+                    logging.info('Your password is too short.\n')
+                except TooLongError:
+                    logging.info('Your password is too long.\n')
+                except RegexFailError:
+                    logging.info('Your password is not in the required format.')
+                finally:
+                    time.sleep(1)
+                h.clearScreen()
+        #----------------------------------------------------------------------------
+        def getFname() -> str:
+            while True:
+                print("REGISTRATION - First Name")
+                print()
+
+                try:
+                    problems = 0            
+                    tryFirstName = input('Enter first name >>> ')
+                    fnameLower = tryFirstName.lower()
+
+                    # regex check all character criteria:
+                    pattern = '(?=^[a-z ,.\'-]+$)(^[^\/:;*?%\"\'<>|]+$)'
+                    match = re.search(pattern, fnameLower)
+                    if not match:
+                        problems+=1
+                        raise RegexFailError
+                    
+                    # only return if no problems
+                    if problems == 0:
+                        return tryFirstName
+
+                except RegexFailError:
+                    logging.info('Error: avoid the characters \/:;*?%\"\'<>|')
+                finally:
+                    time.sleep(1)
+                h.clearScreen()
+        #----------------------------------------------------------------------------
+        def getLname() -> str:
+            while True:
+                print("REGISTRATION - Last Name")
+                print()
+
+                try:
+                    problems = 0            
+                    tryLastName = input('Enter last name >>> ')
+                    lnameLower = tryLastName.lower()
+                    # regex check all character criteria:
+                    pattern = '(?=^[a-z ,.\'-]+$)(^[^\/:;*?%\"\'<>|]+$)'
+                    match = re.search(pattern, lnameLower)
+                    if not match:
+                        problems+=1
+                        raise RegexFailError
+                    
+                    # only return if no problems
+                    if problems == 0:
+                        return tryLastName
+
+                except RegexFailError:
+                    logging.info('Error: avoid the characters \/:;*?%\"\'<>|')
+                finally:
+                    time.sleep(1)
+                h.clearScreen()
+        #----------------------------------------------------------------------------
+        def getEmail() -> str:
+            while True:
+                print("REGISTRATION - Email")
+                print()
+
+                try:
+                    problems = 0            
+                    tryEmail = input('Enter email address >>> ')
+                    email_lower = tryEmail.lower()
+                    # regex check all character criteria:
+                    pattern = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+                    match = re.search(pattern, email_lower)
+                    if not match:
+                        problems+=1
+                        raise RegexFailError
+                    
+                    # only return if no problems
+                    if problems == 0:
+                        return tryEmail
+
+                except RegexFailError:
+                    logging.info('Your email could not be validated.')
+                finally:
+                    time.sleep(1)
+                h.clearScreen()
+        #============================================================================
+
+        userName = getUsername()
+        password = getPassword()
+        firstName = getFname()
+        lastName = getLname()
+        email = getEmail()
+        document = {
+            'role': 'customer',
+            'username': userName,
+            'password': password,
+            'nameF': firstName,
+            'nameL': lastName,
+            'email':email,
+            'wallet': 0
+        }
+        dbM.append_document(document,'Users')
+
+        self.stateName = 'main menu'
+        self.state = self.states[self.stateName]
+        return
+
     def specialState(self):
         if self.stateName == 'login':
             logging.info('stateName = login')
@@ -146,6 +337,7 @@ class MenuManager:
 
         if self.stateName == 'register':
             logging.info('stateName = register')
+            self.register()
         if self.stateName == 'quit':
             logging.info('stateName = quit')
             print("Quitting...")
