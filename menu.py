@@ -423,7 +423,65 @@ class MenuManager:
 
     #================================================================================
     #================================================================================
+    def deleteUser(self):
+        
+        userCredentials = dbM.getUserCredentials()
+        thisUser = userCredentials[0]
+        deleted_self = False
 
+        while True:
+
+            print('DELETE USER')
+            print()
+            targetUsername = input('Enter the username of the user to delete >>> ')
+            logging.error('target is ' + targetUsername)
+
+            # if we try to delete ourself, warn us first
+            if targetUsername == thisUser:
+                answer = input('Are you sure you want to delete your own account? 1 -> yes, 2 -> no >>> ')
+                
+                if int(answer) == 1:
+                    deleted_self = True
+
+                else: # makes it easy to back-out
+                    self.stateName = f'admin menu'
+                    self.state = self.states[self.stateName]
+                    break # out of loop, to return
+
+            # if no match, try loop again (coninue)
+            # regex means (facilitates re.IGNORECASE keyarg, which will give WRONG answer!):
+            # if not dbM.countMatches({'username': re.compile('^' + targetUsername + '$'),re.IGNORECASE},'Users')
+            logging.error('print count:  ' + str(dbM.countMatches({'username': targetUsername},'Users')))
+            if not dbM.countMatches({'username': targetUsername},'Users') == 1:
+                logging.error(f'user {targetUsername} does not exist. Try again.')
+                continue
+            
+            document_deleted = dbM.delete_document({'username':targetUsername}, 'Users')
+            if document_deleted:
+                logging.info(f'successfully deleted {targetUsername}\'s document:\n{document_deleted}.')
+                
+                if deleted_self:
+                    self.stateName = 'main menu'
+                    self.state = self.states[self.stateName]
+                else:
+                    self.stateName = f'admin menu'
+                    self.state = self.states[self.stateName]
+                break
+            else:
+                logging.warning(f'failed to delete {targetUsername}\'s document.')
+            
+            time.sleep(1)
+            h.clearScreen()
+        
+        return
+        
+        
+        
+        time.sleep(1)
+        return
+
+    #================================================================================
+    #================================================================================
     def specialState(self):
         if self.stateName == 'login':
             logging.debug('stateName = login')
@@ -440,6 +498,10 @@ class MenuManager:
         if self.stateName == 'change user role':
             logging.debug('stateName = change user role')
             self.changeUserRole()
+        
+        if self.stateName == 'delete user':
+            logging.debug('stateName = delete user')
+            self.deleteUser()
 
         if self.stateName == 'quit':
             logging.debug('stateName = quit')

@@ -6,3 +6,8 @@ when commiting do
 git add .
 git commit -m '<write comment here>'
 git push
+
+#-----------------------------------
+
+If you do logging.error() or higher inside a try block, it will raise an exception.
+Don't do this by accident (again, I mean...)!

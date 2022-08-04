@@ -39,3 +39,90 @@ INFO :: 2022-08-04 08:06:22,855 -- successful login
 INFO :: 2022-08-04 08:06:22,855 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
 DEBUG :: 2022-08-04 08:06:33,786 -- stateName = logoff
 INFO :: 2022-08-04 08:06:33,787 -- Logging off...
+DEBUG :: 2022-08-04 11:53:45,209 -- stateName = login
+INFO :: 2022-08-04 11:54:02,177 -- successful login
+INFO :: 2022-08-04 11:54:02,178 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 11:54:07,586 -- stateName = delete user
+INFO :: 2022-08-04 11:54:44,110 -- SUCCESSFULLY deleted document.
+INFO :: 2022-08-04 11:54:44,110 -- successfully deleted test_customer's document:
+<pymongo.results.DeleteResult object at 0x0000027B2CF13880>.
+DEBUG :: 2022-08-04 11:57:14,365 -- stateName = login
+WARNING :: 2022-08-04 11:57:27,511 -- invalid password
+INFO :: 2022-08-04 11:57:28,526 -- failed login
+INFO :: 2022-08-04 11:58:05,798 -- successful login
+INFO :: 2022-08-04 11:58:05,798 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 11:58:10,883 -- stateName = delete user
+ERROR :: 2022-08-04 11:59:22,559 -- FAILED to delete document.
+INFO :: 2022-08-04 11:59:23,578 -- SUCCESSFULLY deleted document.
+INFO :: 2022-08-04 11:59:23,578 -- successfully deleted test_customer's document:
+<pymongo.results.DeleteResult object at 0x0000021BF63375B0>.
+DEBUG :: 2022-08-04 12:01:55,398 -- stateName = login
+INFO :: 2022-08-04 12:02:06,623 -- successful login
+INFO :: 2022-08-04 12:02:06,623 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 12:02:11,803 -- stateName = delete user
+ERROR :: 2022-08-04 12:02:21,979 -- target istest_customer
+ERROR :: 2022-08-04 12:02:21,982 -- FAILED to delete document.
+INFO :: 2022-08-04 12:02:23,006 -- SUCCESSFULLY deleted document.
+INFO :: 2022-08-04 12:02:23,006 -- successfully deleted test_customer's document:
+<pymongo.results.DeleteResult object at 0x00000284C27B7850>.
+DEBUG :: 2022-08-04 12:07:15,229 -- stateName = login
+INFO :: 2022-08-04 12:07:32,045 -- successful login
+INFO :: 2022-08-04 12:07:32,046 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 12:07:35,552 -- stateName = delete user
+ERROR :: 2022-08-04 12:07:41,043 -- target isTest_Customer
+ERROR :: 2022-08-04 12:07:41,045 -- FAILED to delete document.
+INFO :: 2022-08-04 12:07:42,066 -- SUCCESSFULLY deleted document.
+INFO :: 2022-08-04 12:07:42,066 -- successfully deleted Test_Customer's document:
+<pymongo.results.DeleteResult object at 0x0000026FEDEC7790>.
+DEBUG :: 2022-08-04 12:13:06,367 -- stateName = login
+WARNING :: 2022-08-04 12:13:28,076 -- invalid password
+INFO :: 2022-08-04 12:13:29,079 -- failed login
+INFO :: 2022-08-04 12:13:47,178 -- successful login
+INFO :: 2022-08-04 12:13:47,179 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 12:13:55,606 -- stateName = delete user
+ERROR :: 2022-08-04 12:14:02,298 -- target is Test_Customer
+ERROR :: 2022-08-04 12:14:02,299 -- user Test_Customer does not exist. Try again.
+DEBUG :: 2022-08-04 12:22:19,089 -- stateName = login
+INFO :: 2022-08-04 12:22:33,353 -- successful login
+INFO :: 2022-08-04 12:22:33,353 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 12:22:36,998 -- stateName = delete user
+ERROR :: 2022-08-04 12:22:41,199 -- target is Test_Customer
+DEBUG :: 2022-08-04 12:23:50,675 -- stateName = login
+INFO :: 2022-08-04 12:24:00,186 -- successful login
+INFO :: 2022-08-04 12:24:00,187 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 12:24:03,476 -- stateName = delete user
+ERROR :: 2022-08-04 12:24:08,903 -- target is Test_Customer
+ERROR :: 2022-08-04 12:24:08,905 -- print count:  1
+ERROR :: 2022-08-04 12:24:08,907 -- FAILED to delete document.
+INFO :: 2022-08-04 12:24:09,931 -- SUCCESSFULLY deleted document.
+INFO :: 2022-08-04 12:24:09,931 -- successfully deleted Test_Customer's document:
+<pymongo.results.DeleteResult object at 0x0000011F35703370>.
+DEBUG :: 2022-08-04 12:26:47,321 -- stateName = login
+INFO :: 2022-08-04 12:27:11,537 -- successful login
+INFO :: 2022-08-04 12:27:11,538 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 12:28:17,677 -- stateName = login
+INFO :: 2022-08-04 12:28:34,010 -- successful login
+INFO :: 2022-08-04 12:28:34,010 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 12:28:37,535 -- stateName = delete user
+ERROR :: 2022-08-04 12:29:05,535 -- target is Test_Customer
+ERROR :: 2022-08-04 12:29:05,536 -- print count:  1
+INFO :: 2022-08-04 12:29:06,550 -- SUCCESSFULLY deleted document.
+INFO :: 2022-08-04 12:29:06,550 -- successfully deleted Test_Customer's document:
+<pymongo.results.DeleteResult object at 0x000002010B692FE0>.
+DEBUG :: 2022-08-04 12:35:42,830 -- stateName = login
+INFO :: 2022-08-04 12:35:58,432 -- successful login
+INFO :: 2022-08-04 12:35:58,432 -- successful login with credentials ('Test_Self', 'Test_Password1', 'admin').
+DEBUG :: 2022-08-04 12:36:02,732 -- stateName = delete user
+ERROR :: 2022-08-04 12:36:13,860 -- target is Test_Self
+DEBUG :: 2022-08-04 12:36:21,807 -- stateName = delete user
+ERROR :: 2022-08-04 12:36:27,204 -- target is Test_User
+ERROR :: 2022-08-04 12:36:27,206 -- print count:  0
+ERROR :: 2022-08-04 12:36:27,207 -- user Test_User does not exist. Try again.
+ERROR :: 2022-08-04 12:36:59,636 -- target is Test_Self
+ERROR :: 2022-08-04 12:37:02,029 -- print count:  1
+INFO :: 2022-08-04 12:37:03,053 -- SUCCESSFULLY deleted document.
+INFO :: 2022-08-04 12:37:03,053 -- successfully deleted Test_Self's document:
+<pymongo.results.DeleteResult object at 0x00000169FCCB3AF0>.
+DEBUG :: 2022-08-04 12:37:22,826 -- stateName = login
+WARNING :: 2022-08-04 12:37:29,581 -- invalid username
+INFO :: 2022-08-04 12:37:30,594 -- failed login

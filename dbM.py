@@ -20,12 +20,19 @@ class dbManager():
 
     #================================================================================
     #================================================================================
+    # Get _user_credentials
+    @staticmethod
+    def getUserCredentials():
+        return dbManager._user_credentials
+        
+    #================================================================================
+    #================================================================================
     # Resets user credentials to None. Used when logging off.
     @staticmethod
     def voidUserCredentials():
         dbManager._user_credentials = None
         return
-        
+
     #================================================================================
     #================================================================================ 
     # Generates the mineral collection, which is basically an inventory table for our
@@ -220,6 +227,24 @@ class dbManager():
             logging.info(f'SUCCESS: added document {str(document)} to collection {collectionName}.')
         return
 
+    #================================================================================
+    #================================================================================
+    # wrapper for delete_one()
+    @staticmethod
+    def delete_document(query: dict, collectionName: str) -> dict:
+        
+        try:
+            result = db[collectionName].delete_one(query)
+        except:
+            print('INSIDE')
+            logging.error(f'FAILED to delete document.')
+        finally:
+            time.sleep(1)
+            h.clearScreen()
+        if result:
+            logging.info(f'SUCCESSFULLY deleted document.')
+        return result
+    
     #================================================================================
     #================================================================================
     @staticmethod
