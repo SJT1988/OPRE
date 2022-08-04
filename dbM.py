@@ -189,14 +189,34 @@ class dbManager():
     
     #================================================================================
     #================================================================================
+    # check if any documents already contain the given key-value pair and return the
+    # count. This is just a wrapper for the count_documents() method.
+    @staticmethod
+    def countMatches(key_value_pair: dict, collectionName: str) -> int:
+        return db[collectionName].count_documents(key_value_pair)
+    
+    #================================================================================
+    #================================================================================
     @staticmethod
     def append_document(document: dict, collectionName: str):
-        
+        success = True
         try:
             db[collectionName].insert_one(document)
         except:
             logging.error(f'FAILURE: document was not appended to {collectionName}.')
+            success = False
         finally:
             time.sleep(1)
             h.clearScreen()
+        if success == True:
+            logging.info(f'SUCCESS: added document {str(document)} to collection {collectionName}.')
         return
+
+    #================================================================================
+    #================================================================================
+    @staticmethod
+    def updateField(match_this: dict, set_this: dict, collectionName: str) -> int:
+        # result is a dict with 3 key-value pairs: acknowledged, matched count, modified count
+        result = db[collectionName].find_one_and_update(match_this, {'$set': set_this})
+        logging.debug(result)
+        return result

@@ -1,0 +1,32 @@
+INFO :: 2022-08-04 03:03:57,491 -- stateName = register
+INFO :: 2022-08-04 03:16:16,918 -- stateName = register
+INFO :: 2022-08-04 03:16:20,254 -- your username is too short.
+
+INFO :: 2022-08-04 03:16:35,718 -- Your password is too short.
+
+INFO :: 2022-08-04 03:24:27,571 -- stateName = register
+INFO :: 2022-08-04 04:01:47,731 -- stateName = register
+INFO :: 2022-08-04 04:01:51,165 -- your username is too short.
+
+INFO :: 2022-08-04 04:02:00,132 -- your username is too short.
+
+INFO :: 2022-08-04 04:02:08,333 -- your username is too long.
+
+INFO :: 2022-08-04 04:02:17,380 -- your username contains 10 invalid characters.
+INFO :: 2022-08-04 05:02:36,653 -- stateName = register
+INFO :: 2022-08-04 05:03:30,985 -- stateName = register
+INFO :: 2022-08-04 05:03:34,718 -- That username is not available.
+INFO :: 2022-08-04 05:51:24,056 -- stateName = quit
+DEBUG :: 2022-08-04 06:43:44,988 -- stateName = login
+INFO :: 2022-08-04 06:44:41,874 -- successful login
+INFO :: 2022-08-04 06:44:41,874 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 06:44:47,563 -- stateName = change user role
+DEBUG :: 2022-08-04 06:48:52,556 -- stateName = login
+INFO :: 2022-08-04 06:49:28,381 -- successful login
+INFO :: 2022-08-04 06:49:28,381 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 06:50:10,151 -- stateName = change user role
+DEBUG :: 2022-08-04 07:08:31,837 -- stateName = login
+INFO :: 2022-08-04 07:08:55,662 -- successful login
+INFO :: 2022-08-04 07:08:55,662 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 07:09:04,976 -- stateName = change user role
+INFO :: 2022-08-04 07:09:24,672 -- Succesfully updated PaddyLuvr99's role to 'admin'.

@@ -12,7 +12,7 @@ class MenuManager:
     def __init__(self):
         self.states = {
             'main menu': {
-                'message': 'MAIN MENU',
+                'message': 'MAIN MENU\n',
                 'options': [
                     ('Login', 'login'),
                     ('Register', 'register'),
@@ -23,7 +23,7 @@ class MenuManager:
             'register':{},
             'quit':{},
             'customer menu':{
-                'message': 'CUSTOMER MENU',
+                'message': 'CUSTOMER MENU\n',
                 'options': [
                     ('Buy Pet Rocks', 'buy'),
                     ('Sell Pet Rocks', 'sell'),
@@ -33,7 +33,7 @@ class MenuManager:
                 ]
             },
             'admin menu':{
-                'message': 'ADMIN MENU',
+                'message': 'ADMIN MENU\n',
                 'options': [
                     ('View User Transactions', 'transactions'),
                     ('Delete User', 'delete user'),
@@ -130,13 +130,14 @@ class MenuManager:
                     break
                 else: #if user doesn't say '2', just make them go around again.
                     pass
+        time.sleep(1)
         return
 
     #================================================================================
     #================================================================================
     # Registration menu
     def register(self):
-        #----------------------------------------------------------------------------
+        
         class TooShortError(Exception):
             pass
         #----------------------------------------------------------------------------
@@ -146,6 +147,9 @@ class MenuManager:
         class InvalidCharError(Exception):
             pass
         #----------------------------------------------------------------------------
+        class AlreadyExistsError(Exception):
+            pass
+        #----------------------------------------------------------------------------
         class RegexFailError(Exception):
             pass
         #----------------------------------------------------------------------------
@@ -153,13 +157,14 @@ class MenuManager:
             while True:
                 print("REGISTRATION - Username")
                 print()
-                h.printl('Username format:\tUsernames must be between 8 and 20 characters long')
+                h.printl('Username format:  Usernames must be between 8 and 20 characters long')
                 h.printl('and cannot contain any of the special characters \/:;*?%\"\'<>|')
                 icc = 0 #invalid character count
 
                 try:
                     problems = 0            
                     tryUsername = input('Enter new username >>> ')
+
                     # check the length:
                     if len(tryUsername) < 8:
                         problems+=1
@@ -167,6 +172,7 @@ class MenuManager:
                     elif len(tryUsername) > 20:
                         problems+=1
                         raise TooLongError
+
                     # check for invalid characters:
                     for c in tryUsername:
                         if c in '\/:;*?%\"\'<>|':
@@ -174,16 +180,24 @@ class MenuManager:
                     if icc > 0:
                         problems+=1
                         raise InvalidCharError
+
+                    # check if another user already has this username. Use case-insensitive exact match:
+                    if dbM.countMatches({'username': re.compile('^' + tryUsername + '$',re.IGNORECASE)},'Users') > 0:
+                        problems+=1
+                        raise AlreadyExistsError
+
                     # only return if no problems:
                     if problems == 0:
                         return tryUsername
 
                 except TooShortError:
-                    logging.info('your username is too short.\n')
+                    logging.info('Your username is too short.\n')
                 except TooLongError:
-                    logging.info('your username is too long.\n')
+                    logging.info('Your username is too long.\n')
                 except InvalidCharError:
-                    logging.info(f'your username contains {icc} invalid characters.')
+                    logging.info(f'Your username contains {icc} invalid characters.')
+                except AlreadyExistsError:
+                    logging.info(f'That username is not available.')
                 finally:
                     time.sleep(1)
                 h.clearScreen()
@@ -192,7 +206,7 @@ class MenuManager:
             while True:
                 print("REGISTRATION - Password")
                 print()
-                h.printl('Password format:\tPasswords must be between 8 and 20 characters long,')
+                h.printl('Password format:  Passwords must be between 8 and 20 characters long,')
                 h.printl('contain both lower and uppercase characters, at least one digt,')
                 h.printl('at least one non-word character, and cannot contain any of')
                 h.printl('the non-word characters \/:;*?%\"\'<>|')
@@ -299,12 +313,19 @@ class MenuManager:
                         problems+=1
                         raise RegexFailError
                     
+                    # check if another user already has this username. Use case-insensitive exact match:
+                    if dbM.countMatches({'email': re.compile('^' + tryEmail + '$',re.IGNORECASE)},'Users') > 0:
+                        problems+=1
+                        raise AlreadyExistsError
+
                     # only return if no problems
                     if problems == 0:
                         return tryEmail
 
                 except RegexFailError:
                     logging.info('Your email could not be validated.')
+                except AlreadyExistsError:
+                    logging.info(f'That email is not available.')
                 finally:
                     time.sleep(1)
                 h.clearScreen()
@@ -330,16 +351,80 @@ class MenuManager:
         self.state = self.states[self.stateName]
         return
 
+    #================================================================================
+    #================================================================================
+    # Change User Role menu
+    def ChangeUserRole(self):
+        
+        #----------------------------------------------------------------------------
+        def chooseUser() -> str:
+           
+            while True:
+                print('CHANGE USER ROLE')
+                print()
+                targetUser = input('Enter username of the user whose role will be updated >>> ')
+                targetUser = targetUser.strip()
+                if not dbM.countMatches({'username': re.compile('^' + targetUser + '$',re.IGNORECASE)},'Users') == 1:
+                    logging.error(f'user {targetUser} does not exist. Try again.')
+                else:
+                    time.sleep(1)
+                    h.clearScreen()
+                    return targetUser
+
+        #----------------------------------------------------------------------------
+        def chooseRole(targetUser) -> str:
+            
+            while True:
+                print('CHANGE USER ROLE')
+                print()
+                targetRole = input(f'Enter {targetUser}\'s new role >>> ')
+                targetRole = targetRole.strip() # helps prevent character mismatch
+                targetRole= targetRole.lower() # helps prevent case mismatch
+                if targetRole in ['admin', 'customer']:
+                    time.sleep(1)
+                    h.clearScreen()
+                    return targetRole
+                else:
+                    logging.error('\'Role\' must be either \'customer\' or \'admin\'. Try again.')
+                
+        #----------------------------------------------------------------------------
+        targetUser = chooseUser()
+        targetRole = chooseRole(targetUser)
+        
+        print('CHANGE USER ROLE')
+        print()
+
+        result = dbM.updateField({'username': targetUser}, {'role': targetRole}, 'Users')
+        if result:
+            logging.info(f'Succesfully updated {targetUser}\'s role to \'{targetRole}\'.')
+            self.stateName = f'{targetRole} menu'
+            self.state = self.states[self.stateName]
+        else:
+            logging.error(f'Something went wrong updating {targetUser}\'s role.')
+            self.stateName = 'main menu'
+            self.state = self.states[self.stateName]
+        time.sleep(1)
+        h.clearScreen()
+        return        
+
+    #================================================================================
+    #================================================================================
+
     def specialState(self):
         if self.stateName == 'login':
-            logging.info('stateName = login')
+            logging.debug('stateName = login')
             self.login()
 
         if self.stateName == 'register':
-            logging.info('stateName = register')
+            logging.debug('stateName = register')
             self.register()
+
+        if self.stateName == 'change user role':
+            logging.debug('stateName = change user role')
+            self.ChangeUserRole()
+
         if self.stateName == 'quit':
-            logging.info('stateName = quit')
+            logging.debug('stateName = quit')
             print("Quitting...")
             time.sleep(1)
             exit()
