@@ -51,3 +51,7 @@ DEBUG :: 2022-08-05 09:41:42,382 -- <class 'float'>
 DEBUG :: 2022-08-05 09:41:42,384 -- {'_id': ObjectId('62e9fc516401552a991f74e6'), 'role': 'customer', 'username': 'PaddyLuvr99', 'password': 'Gary_1999', 'nameF': 'Spongebob', 'nameL': 'Squarepants', 'email': 'sudsMcSplashin@gmail.com', 'wallet': 2245.45, 'transactions': [{'datetime': datetime.datetime(2022, 8, 5, 9, 40, 59, 332000), 'transaction type': 'purchase', 'pet name': 'Feona', 'pet talent': 'singing', 'mineral name': 'Adranosite-(Fe)', 'amount': -754.55}]}
 INFO :: 2022-08-05 09:41:42,386 -- Your wallet balance is now 2140.6499999999996. Have a rocky day!
 DEBUG :: 2022-08-05 09:41:58,180 -- stateName = transactions
+DEBUG :: 2022-08-05 11:16:51,912 -- stateName = login
+INFO :: 2022-08-05 11:17:30,302 -- successful login
+INFO :: 2022-08-05 11:17:30,303 -- successful login with credentials ('PaddyLuvr99', 'Gary_1999', 'customer').
+DEBUG :: 2022-08-05 11:17:35,850 -- stateName = buy

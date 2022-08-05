@@ -734,7 +734,7 @@ class MenuManager:
                     if idx == '':
                         return
 
-                    if (int(idx)) not in idxList:
+                    if idx != '' and (int(idx)) not in idxList:
                         raise OutOfRangeError    
                     return idx
                 except OutOfRangeError:
