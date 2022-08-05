@@ -1,6 +1,8 @@
 import logging, time, re
+from bson import ObjectId
 from dbM import dbManager as dbM
 from helper import helper as h
+from datetime import datetime
 # singleton class for handling various I/O functionality
 class MenuManager:
 
@@ -345,10 +347,12 @@ class MenuManager:
             'nameF': firstName,
             'nameL': lastName,
             'email':email,
-            'wallet': 0
+            'wallet': 0,
+            'transactions':{}
         }
         dbM.append_document(document,'Users')
-
+        #try-hard way to append record. Works, but wasteful in this situtation
+        #dbM.update_field({'username': userName},{'transactions': {}}, 'Users')
         self.stateName = 'main menu'
         self.state = self.states[self.stateName]
         return
@@ -408,7 +412,7 @@ class MenuManager:
         print('CHANGE USER ROLE')
         print()
 
-        result = dbM.updateField({'username': targetUser}, {'role': targetRole}, 'Users')
+        result = dbM.update_field({'username': targetUser}, {'role': targetRole}, 'Users')
         if result:
             logging.info(f'Succesfully updated {targetUser}\'s role to \'{targetRole}\'.')
             self.stateName = f'{targetRole} menu'
@@ -591,6 +595,129 @@ class MenuManager:
         return
 
     #================================================================================
+    #================================================================================    
+    def buy(self):
+        #----------------------------------------------------------------------------
+        class OutOfRangeError(Exception):
+            pass
+        #----------------------------------------------------------------------------
+        def getIndex(idxList: list[int]):
+            while True:
+                try:
+                    idx = input('Enter the index (not _id) of the Mineral to make your new [virtual] pet rock\nor press \'ENTER\' to cancel >>> ')
+                    if idx == '':
+                        return
+
+                    if (int(idx)) not in idxList:
+                        raise OutOfRangeError    
+                    return idx
+                except OutOfRangeError:
+                    logging.info('index out of range. Please choose an index in range.')
+                except:
+                    logging.info('invalid format. Please enter an integer in range.')
+                finally:
+                    time.sleep(1)
+                    h.clearScreen
+        #----------------------------------------------------------------------------
+        def getPetRockName(mineral_name: str)->str:
+            while True:
+                try:
+                    rock_name = input(f'Give your pet {mineral_name} a name >>> ')               
+                    return rock_name
+                except:
+                    logging.info('invalid input. Please give your rock another name.')
+                finally:
+                    time.sleep(1)
+                    h.clearScreen
+        #----------------------------------------------------------------------------
+        def getPetRockTalent(rock_name: str)->str:
+            while True:
+                try:
+                    talent = input(f'Give {rock_name} a talent! >>> ')            
+                    return talent
+                except:
+                    logging.info('invalid input. Please give your rock another talent.')
+                finally:
+                    time.sleep(1)
+                    h.clearScreen
+        #----------------------------------------------------------------------------
+        wallet_balance = dbM.find_and_return_document('Users',{'_id': ObjectId(dbM.get_myId())})['wallet']
+
+        while True:
+            print('BUY A [virtual] PET ROCK!')
+            print()
+
+            if wallet_balance < 0:
+                print('You owe us money. We\'re cutting you off, Bub!')
+                print()
+                time.sleep(1)
+                h.clearScreen()
+                self.stateName = 'customer menu'
+                self.state = self.states[self.stateName]
+                return
+
+            # draw table
+            mineralIdxLst = dbM.tabulateCollection('Minerals', 25)
+            print()
+            # get rock index that we want to buy
+            i = getIndex(range(25)) #input('Enter the index (not _id) of the Mineral to make your new [virtual] pet rock\nor press \'ENTER\' to cancel >>> ')
+            print()
+
+            if i =='':
+                h.clearScreen()
+                print('returning to menu...')
+                time.sleep(1)
+                h.clearScreen
+                self.stateName = 'customer menu'
+                self.state = self.states[self.stateName]
+                return
+
+            # get mineral name
+            mineral_id = mineralIdxLst[int(i)]
+            mineral_price = dbM.find_and_return_document('Minerals',{'_id': ObjectId(mineral_id)})['Value']
+
+            # make sure we can afford this:
+            if wallet_balance < mineral_price:
+                print('You can\'t afford this glorious item!')
+                time.sleep(1)
+                h.clearScreen()
+                continue
+            else:
+                break
+        print()
+        # personalize your rock
+        mineral_name = dbM.find_and_return_document('Minerals',{'_id': ObjectId(mineral_id)})['Name']
+        rock_name = getPetRockName(mineral_name)
+        rock_talent = getPetRockTalent(rock_name)
+        logging.info(f'Buying {rock_name} the {mineral_name} for $' + '{:.2f}'.format(mineral_price) + '.')
+        time.sleep(1)
+
+        # take money
+        logging.debug(type(wallet_balance))
+        dbM.update_field({'_id': ObjectId(dbM.get_myId())},{'wallet': wallet_balance - mineral_price},'Users')
+        wallet_balance = dbM.find_and_return_document('Users',{'_id': ObjectId(dbM.get_myId())})['wallet']
+        logging.info(f'Your wallet balance is now {wallet_balance}. Have a rocky day!')
+
+        time.sleep(0.5)
+        # username = dbM._user_credentials[0]
+        # user_id = dbM.get_id('Users',{'username':username})
+        user_id = dbM.get_myId()
+        dbM.update_field({'_id':ObjectId(user_id)},{'transactions':{
+            'datetime': datetime.now(),
+            'transaction type': 'purchase',
+            'pet name': rock_name,
+            'pet talent': rock_talent,
+            'mineral name': mineral_name,
+            'amount': -1*mineral_price
+        }},
+        'Users')
+
+        time.sleep(1)
+        self.stateName='customer menu'
+        self.state = self.states[self.stateName]
+        return
+
+    #================================================================================
     #================================================================================
     def specialState(self):
         if self.stateName == 'login':
@@ -604,6 +731,10 @@ class MenuManager:
         if self.stateName == 'logoff':
             logging.debug('stateName = logoff')
             self.logoff()
+
+        if self.stateName == 'buy':
+            logging.debug('stateName = buy')
+            self.buy()
 
         if self.stateName == 'change user role':
             logging.debug('stateName = change user role')

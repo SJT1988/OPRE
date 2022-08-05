@@ -4,6 +4,7 @@ import menu
 from pymongo import MongoClient
 from helper import helper as h
 from pandas import DataFrame
+from bson.objectid import ObjectId
 
 # Special thanks to RRUFF Project for making their database downloadable
 # in csv format
@@ -230,6 +231,14 @@ class dbManager():
 
     #================================================================================
     #================================================================================
+    # @staticmethod
+    # def update_document(collectionName: str, query: dict, update_or_override: dict):
+    #     result = db[collectionName].update_one(query, {"$set": update_or_override})
+    #     logging.info(result)
+    #     return result
+
+    #================================================================================
+    #================================================================================
     # wrapper for delete_one()
     @staticmethod
     def delete_document(query: dict, collectionName: str) -> dict:
@@ -249,7 +258,7 @@ class dbManager():
     #================================================================================
     #================================================================================
     @staticmethod
-    def updateField(match_this: dict, set_this: dict, collectionName: str):
+    def update_field(match_this: dict, set_this: dict, collectionName: str):
 
         # result is the updated document or None if the document cannot be found.
         result = db[collectionName].find_one_and_update(match_this, {'$set': set_this})
@@ -259,19 +268,37 @@ class dbManager():
     #================================================================================
     #================================================================================
     @staticmethod
-    def tabulateCollection(collectionName: str, firstN = None) -> list:
+    def tabulateCollection(collectionName: str, first_n_docs = None) -> list:
         
         cursor = db[collectionName].find()
         list_cursor = list(cursor)
         df = DataFrame(list_cursor)
         
-        if firstN == None:
+        if first_n_docs == None:
             print(df.head())
         else:
-            print((df.head(int(firstN))))
-        id_list = df['_id'].tolist()
+            print((df.head(int(first_n_docs))))
+        id_list = df['_id'].tolist() # might be useful
         
         return id_list
 
     #================================================================================
     #================================================================================
+    @staticmethod
+    def find_and_return_document(collectionName: str, query: dict):
+        return db[collectionName].find_one(query)
+
+    #================================================================================
+    #================================================================================
+    @staticmethod
+    def get_id(collectionName:str, query:dict):
+        _id = db[collectionName].find_one(query)['_id']
+        return _id
+    
+    #================================================================================
+    #================================================================================
+    @staticmethod
+    def get_myId():
+        username = dbManager._user_credentials[0]
+        _id = dbManager.get_id('Users',{'username':username})
+        return _id

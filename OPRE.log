@@ -201,3 +201,127 @@ INFO :: 2022-08-04 17:56:21,635 -- successful login with credentials ('Daedalus_
 DEBUG :: 2022-08-04 17:56:26,616 -- stateName = delete mineral
 INFO :: 2022-08-04 17:56:32,515 -- SUCCESSFULLY deleted document.
 DEBUG :: 2022-08-04 17:57:14,593 -- stateName = delete mineral
+DEBUG :: 2022-08-05 03:10:13,204 -- stateName = login
+DEBUG :: 2022-08-05 03:10:39,047 -- stateName = register
+INFO :: 2022-08-05 03:11:14,510 -- SUCCESS: added document {'role': 'customer', 'username': 'Test_User', 'password': 'Test_Password1', 'nameF': 'Test', 'nameL': 'User', 'email': 'testuser@revature.net', 'wallet': 0, '_id': ObjectId('62ececc11b956420dbf4a615')} to collection Users.
+DEBUG :: 2022-08-05 03:11:14,512 -- {'_id': ObjectId('62ececc11b956420dbf4a615'), 'role': 'customer', 'username': 'Test_User', 'password': 'Test_Password1', 'nameF': 'Test', 'nameL': 'User', 'email': 'testuser@revature.net', 'wallet': 0}
+DEBUG :: 2022-08-05 03:36:40,946 -- stateName = login
+INFO :: 2022-08-05 03:36:56,135 -- successful login
+INFO :: 2022-08-05 03:36:56,136 -- successful login with credentials ('PaddyLuvr99', 'Gary_1999', 'customer').
+DEBUG :: 2022-08-05 03:41:13,213 -- stateName = login
+INFO :: 2022-08-05 03:41:23,536 -- successful login
+INFO :: 2022-08-05 03:41:23,536 -- successful login with credentials ('PaddyLuvr99', 'Gary_1999', 'customer').
+DEBUG :: 2022-08-05 03:41:30,291 -- stateName = buy
+DEBUG :: 2022-08-05 03:54:11,250 -- stateName = login
+INFO :: 2022-08-05 03:54:23,589 -- successful login
+INFO :: 2022-08-05 03:54:23,589 -- successful login with credentials ('PaddyLuvr99', 'Gary_1999', 'customer').
+DEBUG :: 2022-08-05 03:54:28,307 -- stateName = buy
+DEBUG :: 2022-08-05 03:55:20,139 -- stateName = login
+INFO :: 2022-08-05 03:55:29,586 -- successful login
+INFO :: 2022-08-05 03:55:29,586 -- successful login with credentials ('PaddyLuvr99', 'Gary_1999', 'customer').
+DEBUG :: 2022-08-05 03:55:34,158 -- stateName = buy
+DEBUG :: 2022-08-05 03:57:40,237 -- stateName = login
+INFO :: 2022-08-05 03:57:57,267 -- successful login
+INFO :: 2022-08-05 03:57:57,268 -- successful login with credentials ('PaddyLuvr99', 'Gary_1999', 'customer').
+DEBUG :: 2022-08-05 03:58:01,078 -- stateName = buy
+DEBUG :: 2022-08-05 04:00:38,550 -- stateName = login
+INFO :: 2022-08-05 04:00:50,295 -- successful login
+INFO :: 2022-08-05 04:00:50,295 -- successful login with credentials ('PaddyLuvr99', 'Gary_1999', 'customer').
+DEBUG :: 2022-08-05 04:00:54,669 -- stateName = buy
+DEBUG :: 2022-08-05 04:00:56,834 -- 62e9fc516401552a991f74e6
+DEBUG :: 2022-08-05 04:28:56,048 -- stateName = login
+INFO :: 2022-08-05 04:29:07,997 -- successful login
+INFO :: 2022-08-05 04:29:07,997 -- successful login with credentials ('PaddyLuvr99', 'Gary_1999', 'customer').
+DEBUG :: 2022-08-05 04:29:12,475 -- stateName = buy
+DEBUG :: 2022-08-05 04:30:04,719 -- stateName = login
+INFO :: 2022-08-05 04:30:17,885 -- successful login
+INFO :: 2022-08-05 04:30:17,885 -- successful login with credentials ('PaddyLuvr99', 'Gary_1999', 'customer').
+DEBUG :: 2022-08-05 04:30:22,054 -- stateName = buy
+DEBUG :: 2022-08-05 04:30:33,143 -- Abelsonite
+DEBUG :: 2022-08-05 04:32:17,104 -- stateName = login
+INFO :: 2022-08-05 04:32:23,774 -- successful login
+INFO :: 2022-08-05 04:32:23,774 -- successful login with credentials ('PaddyLuvr99', 'Gary_1999', 'customer').
+DEBUG :: 2022-08-05 04:32:28,076 -- stateName = buy
+DEBUG :: 2022-08-05 04:32:45,087 -- Abelsonite
+DEBUG :: 2022-08-05 05:04:13,241 -- stateName = login
+WARNING :: 2022-08-05 05:04:26,542 -- invalid password
+INFO :: 2022-08-05 05:04:27,547 -- failed login
+WARNING :: 2022-08-05 05:05:11,988 -- invalid password
+INFO :: 2022-08-05 05:05:12,990 -- failed login
+WARNING :: 2022-08-05 05:05:23,291 -- invalid password
+INFO :: 2022-08-05 05:05:24,304 -- failed login
+INFO :: 2022-08-05 05:05:36,899 -- successful login
+INFO :: 2022-08-05 05:05:36,900 -- successful login with credentials ('Test_User', 'Test_Password1', 'customer').
+DEBUG :: 2022-08-05 05:05:44,865 -- stateName = buy
+INFO :: 2022-08-05 05:06:26,235 -- Buying Abel the Abenakiite-(Ce) for $24.16.
+DEBUG :: 2022-08-05 05:07:14,798 -- stateName = login
+INFO :: 2022-08-05 05:07:26,045 -- successful login
+INFO :: 2022-08-05 05:07:26,046 -- successful login with credentials ('Test_User', 'Test_Password1', 'customer').
+DEBUG :: 2022-08-05 05:07:35,778 -- stateName = buy
+INFO :: 2022-08-05 05:08:00,806 -- Buying Abel the Abelsonite for $859.80.
+DEBUG :: 2022-08-05 05:09:25,018 -- stateName = login
+INFO :: 2022-08-05 05:09:31,149 -- successful login
+INFO :: 2022-08-05 05:09:31,150 -- successful login with credentials ('Test_User', 'Test_Password1', 'customer').
+DEBUG :: 2022-08-05 05:09:36,904 -- stateName = buy
+INFO :: 2022-08-05 05:10:05,554 -- Buying Abel the Abelsonite for $859.80.
+DEBUG :: 2022-08-05 05:10:06,576 -- {'_id': ObjectId('62ececc11b956420dbf4a615'), 'role': 'customer', 'username': 'Test_User', 'password': 'Test_Password1', 'nameF': 'Test', 'nameL': 'User', 'email': 'testuser@revature.net', 'wallet': 0, 'transactions': {}}
+INFO :: 2022-08-05 05:10:06,584 -- Your wallet balance is now 0. Have a rocky day!
+DEBUG :: 2022-08-05 05:11:45,341 -- stateName = login
+WARNING :: 2022-08-05 05:11:54,789 -- invalid password
+INFO :: 2022-08-05 05:11:55,795 -- failed login
+WARNING :: 2022-08-05 05:12:04,475 -- invalid password
+INFO :: 2022-08-05 05:12:05,476 -- failed login
+INFO :: 2022-08-05 05:12:13,618 -- successful login
+INFO :: 2022-08-05 05:12:13,619 -- successful login with credentials ('Test_User', 'Test_Password1', 'customer').
+DEBUG :: 2022-08-05 05:12:20,681 -- stateName = buy
+INFO :: 2022-08-05 05:12:35,124 -- Buying Abel the Abellaite for $843.50.
+DEBUG :: 2022-08-05 05:12:36,150 -- {'_id': ObjectId('62ececc11b956420dbf4a615'), 'role': 'customer', 'username': 'Test_User', 'password': 'Test_Password1', 'nameF': 'Test', 'nameL': 'User', 'email': 'testuser@revature.net', 'wallet': 0, 'transactions': {}, 'Wallet': -859.8}
+INFO :: 2022-08-05 05:12:36,151 -- Your wallet balance is now 0. Have a rocky day!
+DEBUG :: 2022-08-05 05:12:36,668 -- {'_id': ObjectId('62ececc11b956420dbf4a615'), 'role': 'customer', 'username': 'Test_User', 'password': 'Test_Password1', 'nameF': 'Test', 'nameL': 'User', 'email': 'testuser@revature.net', 'wallet': 0, 'transactions': {}, 'Wallet': -843.5}
+DEBUG :: 2022-08-05 05:19:36,229 -- stateName = login
+INFO :: 2022-08-05 05:19:44,987 -- successful login
+INFO :: 2022-08-05 05:19:44,987 -- successful login with credentials ('Test_User', 'Test_Password1', 'customer').
+DEBUG :: 2022-08-05 05:20:01,236 -- stateName = buy
+DEBUG :: 2022-08-05 05:20:20,233 -- 95.45
+DEBUG :: 2022-08-05 05:31:01,789 -- stateName = login
+INFO :: 2022-08-05 05:31:15,064 -- successful login
+INFO :: 2022-08-05 05:31:15,065 -- successful login with credentials ('Test_User', 'Test_Password1', 'customer').
+DEBUG :: 2022-08-05 05:31:19,275 -- stateName = buy
+DEBUG :: 2022-08-05 05:31:52,911 -- stateName = login
+INFO :: 2022-08-05 05:32:05,078 -- successful login
+INFO :: 2022-08-05 05:32:05,078 -- successful login with credentials ('Test_User', 'Test_Password1', 'customer').
+DEBUG :: 2022-08-05 05:32:08,105 -- stateName = buy
+INFO :: 2022-08-05 05:32:15,485 -- index out of range. Please choose an index in range.
+DEBUG :: 2022-08-05 05:33:10,537 -- stateName = login
+INFO :: 2022-08-05 05:33:21,215 -- successful login
+INFO :: 2022-08-05 05:33:21,216 -- successful login with credentials ('Test_User', 'Test_Password1', 'customer').
+DEBUG :: 2022-08-05 05:33:24,115 -- stateName = buy
+INFO :: 2022-08-05 05:33:25,133 -- index out of range. Please choose an index in range.
+INFO :: 2022-08-05 05:33:33,036 -- index out of range. Please choose an index in range.
+DEBUG :: 2022-08-05 05:35:08,493 -- stateName = login
+DEBUG :: 2022-08-05 05:35:20,476 -- stateName = login
+WARNING :: 2022-08-05 05:35:28,696 -- invalid password
+INFO :: 2022-08-05 05:35:29,704 -- failed login
+INFO :: 2022-08-05 05:35:38,629 -- successful login
+INFO :: 2022-08-05 05:35:38,630 -- successful login with credentials ('Test_User', 'Test_Password1', 'customer').
+DEBUG :: 2022-08-05 05:35:43,403 -- stateName = buy
+DEBUG :: 2022-08-05 05:35:46,534 -- 859.8
+INFO :: 2022-08-05 05:35:59,843 -- Buying Abel the Abelsonite for $859.80.
+DEBUG :: 2022-08-05 05:36:00,859 -- <class 'int'>
+DEBUG :: 2022-08-05 05:36:00,871 -- {'_id': ObjectId('62ececc11b956420dbf4a615'), 'role': 'customer', 'username': 'Test_User', 'password': 'Test_Password1', 'nameF': 'Test', 'nameL': 'User', 'email': 'testuser@revature.net', 'wallet': 0, 'transactions': {}}
+INFO :: 2022-08-05 05:36:00,873 -- Your wallet balance is now -859.8. Have a rocky day!
+DEBUG :: 2022-08-05 05:36:01,388 -- {'_id': ObjectId('62ececc11b956420dbf4a615'), 'role': 'customer', 'username': 'Test_User', 'password': 'Test_Password1', 'nameF': 'Test', 'nameL': 'User', 'email': 'testuser@revature.net', 'wallet': -859.8, 'transactions': {}}
+DEBUG :: 2022-08-05 05:54:20,910 -- stateName = login
+WARNING :: 2022-08-05 05:54:32,878 -- invalid password
+INFO :: 2022-08-05 05:54:33,886 -- failed login
+INFO :: 2022-08-05 05:54:42,001 -- successful login
+INFO :: 2022-08-05 05:54:42,002 -- successful login with credentials ('Test_User', 'Test_Password1', 'customer').
+DEBUG :: 2022-08-05 05:54:55,844 -- stateName = buy
+DEBUG :: 2022-08-05 05:58:35,845 -- stateName = login
+INFO :: 2022-08-05 05:58:43,652 -- successful login
+INFO :: 2022-08-05 05:58:43,652 -- successful login with credentials ('Test_User', 'Test_Password1', 'customer').
+DEBUG :: 2022-08-05 05:58:47,131 -- stateName = buy
+DEBUG :: 2022-08-05 06:00:04,920 -- stateName = login
+INFO :: 2022-08-05 06:00:20,535 -- successful login
+INFO :: 2022-08-05 06:00:20,536 -- successful login with credentials ('Test_User', 'Test_Password1', 'customer').
+DEBUG :: 2022-08-05 06:00:23,914 -- stateName = buy
