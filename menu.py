@@ -1,8 +1,10 @@
+from bdb import Breakpoint
 import logging, time, re
 from bson import ObjectId
 from dbM import dbManager as dbM
 from helper import helper as h
 from datetime import datetime
+from pandas import DataFrame
 # singleton class for handling various I/O functionality
 class MenuManager:
 
@@ -28,9 +30,8 @@ class MenuManager:
                 'message': 'CUSTOMER MENU\n',
                 'options': [
                     ('Buy Pet Rocks', 'buy'),
-                    ('Sell Pet Rocks', 'sell'),
                     ('Transaction History', 'transactions'),
-                    ('Account Options', 'customer options'),
+                    ('Add Money', 'add money'),
                     ('Logoff', 'logoff')
                 ]
             },
@@ -42,22 +43,15 @@ class MenuManager:
                     ('Change User Role', 'change user role'),
                     ('Delete Mineral', 'delete mineral'),
                     ('Append Mineral', 'append mineral'),
-                    ('Give Pet?', 'append pet'),
-                    ('Take Pet!', 'delete pet'),
-                    ('Account Options', 'admin options'),
                     ('Logoff', 'logoff')
                 ]
             },
             'buy':{},
-            'sell':{},
-            'customer options':{},
-            'admin options':{},
+            'add money':{},
             'delete user':{},
             'change user role':{},
             'delete mineral':{},
             'append mineral':{},
-            'delete pet':{},
-            'append pet':{},
             'transactions':{},            
             'logoff':{}
         }
@@ -79,26 +73,79 @@ class MenuManager:
     #================================================================================
     #================================================================================
     # HELPER Wrapper for printing faux copywrite info at the top of each screen
-    def copyright():
+    def copyright(self):
         print('© 2022 ROCK HARD ASSETS, Inc. All Rights Reserved.\n')
 
     #================================================================================
     #================================================================================
-    # landing menu ((UNUSED)
-    def menu_landing(self):
-        self.copyright()
-        self.printc('WELCOME TO THE PET ROCK')
-        self.printc('VIRTUAL EMPORIUM!')
-        print('\n')
-        self.printc('1.\tLogin')
-        self.printc('    2.\tRegister')
-        print('\n')
-        userIn = input('Please make a selection: >>> ')
-        return userIn
+    # add money to wallet
+    def addMoney(self):
+        #----------------------------------------------------------------------------
+        def get_dollar_amount()->float:
+            value = None
+            while True:
+                try:
+                    value = input('Enter the USD amount to transfer to your wallet from your bank.\nCommas will be ignored (ex: 6, $1.00, 3., 0., 1.2): >>> ')
+                    value = value.strip(' $') # strip whitespace, dollar sign
+                    value_noCommas = value.replace(',','')
+                    # check for invalid characters:
+                    # regex check all character criteria:
+                    pattern = '^((?:\d)+(?:\.)?(?:\d){0,2})$|^((?:\d)*(?:\.)(?:\d){1,2})$'
+                    match = re.search(pattern, value_noCommas)
+                    if not match:
+                        print('please use the correct format.')
+                    fltVal = float(value_noCommas)
+                    break
+                except:
+                    logging.warning('Something went wrong. Try another value.')
+            time.sleep(1)
+            h.clearScreen()
+            return fltVal
+        #----------------------------------------------------------------------------
+        
+        print('ADD MONEY')
+        print()
+        transfer_amount = get_dollar_amount()
+        wallet_balance = dbM.find_and_return_document('Users',{'_id': ObjectId(dbM.get_myId())})['wallet']
+        new_amount = wallet_balance+transfer_amount
+        dbM.update_field({'_id': ObjectId(dbM.get_myId())},{'wallet': new_amount},'Users')
+        print('Your new account balance is $'+ '{:.2f}'.format(new_amount) + '.')
+        time.sleep(2)
+        h.clearScreen()
+        self.change_state_to_role_menu()
+        return
+    
+    #================================================================================
+    #================================================================================
+    def transactionHistory(self):
+        myRole = dbM._user_credentials[2]
+        if myRole == 'admin':
+            target_username = input('Enter the user whose transaction history you want to see >>> ')
+            transactions = dbM.find_and_return_document('Users', {'username': target_username})['transactions']
+            df = DataFrame(transactions)
+            print(df)
+            input('Press any key to continue')
 
+            self.stateName = 'admin menu'
+            self.state = self.states[self.stateName]
+
+        elif myRole == 'customer':
+
+            target_username = dbM._user_credentials[0]
+            transactions = dbM.find_and_return_document('Users', {'username': target_username})['transactions']
+            df = DataFrame(transactions)
+            print(df)
+            input('Press any key to continue')
+            self.stateName = 'customer menu'
+            self.state = self.states[self.stateName]
+
+
+        else: # raising an exception will close program.
+            logging.exception('user\'s role is neither \'customer\' nor \'admin\'.\n')
+        return
     #================================================================================
     #================================================================================
-    # HELPER for Login()
+    
     def change_state_to_role_menu(self):
         role = dbM._user_credentials[2]
         if role == 'admin':
@@ -113,6 +160,8 @@ class MenuManager:
             logging.exception('user\'s role is neither \'customer\' nor \'admin\'.\n')
         return
 
+    #================================================================================
+    #================================================================================
     def login(self):
 
         while True:
@@ -192,7 +241,7 @@ class MenuManager:
 
                     # only return if no problems:
                     if problems == 0:
-                        return tryUsername
+                        break
 
                 except TooShortError:
                     logging.info('Your username is too short.\n')
@@ -205,6 +254,8 @@ class MenuManager:
                 finally:
                     time.sleep(1)
                 h.clearScreen()
+            h.clearScreen()
+            return tryUsername
         #----------------------------------------------------------------------------
         def getPassword() -> str:
             while True:
@@ -236,7 +287,7 @@ class MenuManager:
                     
                     # only return if no problems
                     if problems == 0:
-                        return tryPassword
+                        break
 
                 except TooShortError:
                     logging.info('Your password is too short.\n')
@@ -247,6 +298,8 @@ class MenuManager:
                 finally:
                     time.sleep(1)
                 h.clearScreen()
+            h.clearScreen()
+            return tryPassword
         #----------------------------------------------------------------------------
         def getFname() -> str:
             while True:
@@ -267,13 +320,15 @@ class MenuManager:
                     
                     # only return if no problems
                     if problems == 0:
-                        return tryFirstName
+                        break
 
                 except RegexFailError:
                     logging.info('Error: avoid the characters \/:;*?%\"\'<>|')
                 finally:
                     time.sleep(1)
                 h.clearScreen()
+            h.clearScreen()
+            return tryFirstName
         #----------------------------------------------------------------------------
         def getLname() -> str:
             while True:
@@ -293,13 +348,14 @@ class MenuManager:
                     
                     # only return if no problems
                     if problems == 0:
-                        return tryLastName
-
+                        break
                 except RegexFailError:
                     logging.info('Error: avoid the characters \/:;*?%\"\'<>|')
                 finally:
                     time.sleep(1)
                 h.clearScreen()
+            h.clearScreen()
+            return tryLastName
         #----------------------------------------------------------------------------
         def getEmail() -> str:
             while True:
@@ -324,7 +380,7 @@ class MenuManager:
 
                     # only return if no problems
                     if problems == 0:
-                        return tryEmail
+                        break
 
                 except RegexFailError:
                     logging.info('Your email could not be validated.')
@@ -333,6 +389,8 @@ class MenuManager:
                 finally:
                     time.sleep(1)
                 h.clearScreen()
+            h.clearScreen()
+            return tryEmail
         #============================================================================
 
         userName = getUsername()
@@ -348,7 +406,7 @@ class MenuManager:
             'nameL': lastName,
             'email':email,
             'wallet': 0,
-            'transactions':{}
+            'transactions':[]
         }
         dbM.append_document(document,'Users')
         #try-hard way to append record. Works, but wasteful in this situtation
@@ -684,6 +742,8 @@ class MenuManager:
                 continue
             else:
                 break
+        
+        # We exit the loop when a sale is going to succeed
         print()
         # personalize your rock
         mineral_name = dbM.find_and_return_document('Minerals',{'_id': ObjectId(mineral_id)})['Name']
@@ -702,15 +762,18 @@ class MenuManager:
         # username = dbM._user_credentials[0]
         # user_id = dbM.get_id('Users',{'username':username})
         user_id = dbM.get_myId()
-        dbM.update_field({'_id':ObjectId(user_id)},{'transactions':{
+
+        new_transaction = {
             'datetime': datetime.now(),
             'transaction type': 'purchase',
             'pet name': rock_name,
             'pet talent': rock_talent,
             'mineral name': mineral_name,
             'amount': -1*mineral_price
-        }},
-        'Users')
+        }
+
+        #dbM.update_field({'_id':ObjectId(user_id)},{'transactions': new_transaction},
+        dbM._db.Users.update_one({'_id':ObjectId(user_id)},{"$push":{'transactions': new_transaction}})
 
         time.sleep(1)
         self.stateName='customer menu'
@@ -751,6 +814,14 @@ class MenuManager:
         if self.stateName == 'delete mineral':
             logging.debug('stateName = delete mineral')
             self.deleteMineral()
+
+        if self.stateName == 'add money':
+            logging.debug('stateName = add money')
+            self.addMoney()
+
+        if self.stateName == 'transactions':
+            logging.debug('stateName = transactions')
+            self.transactionHistory()
 
         if self.stateName == 'quit':
             logging.debug('stateName = quit')

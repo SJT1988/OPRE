@@ -16,6 +16,7 @@ db = client.get_database('project01')
 class dbManager():
 
     # class variables:
+    _db = db
     _user_credentials = None #(userName,password,role)
     _minerals_csv_file = 'RRUFF_Export_20220731_223900.csv'
     _users_json_file = 'users.json'
@@ -267,21 +268,44 @@ class dbManager():
 
     #================================================================================
     #================================================================================
+    # print the collection as a table
     @staticmethod
-    def tabulateCollection(collectionName: str, first_n_docs = None) -> list:
+    def tabulateCollection(collectionName: str, first_n_docs = None):
+        
+        cursor = db[collectionName].find()
+        list_cursor = list(cursor)
+        df = DataFrame(list_cursor)
+
+        if first_n_docs == None:
+            print(df.head())
+        else:
+            print((df.head(int(first_n_docs))))
+
+        id_list = df['_id'].tolist() # might be useful
+        
+        return id_list
+
+    #================================================================================
+    #================================================================================
+    # print the collection as a table
+    @staticmethod
+    def dataframeFromDict(data: dict, first_n_docs = None):
+        
+        df = DataFrame.from_dict(data, index=0)
+        
+        return df
+
+    #================================================================================
+    #================================================================================
+    # print the collection as a table
+    @staticmethod
+    def CollectionToDataFrame(collectionName: str, first_n_docs = None) -> list:
         
         cursor = db[collectionName].find()
         list_cursor = list(cursor)
         df = DataFrame(list_cursor)
         
-        if first_n_docs == None:
-            print(df.head())
-        else:
-            print((df.head(int(first_n_docs))))
-        id_list = df['_id'].tolist() # might be useful
-        
-        return id_list
-
+        return df_list
     #================================================================================
     #================================================================================
     @staticmethod
