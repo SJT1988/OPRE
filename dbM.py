@@ -3,6 +3,7 @@ import csv, json, random, logging, time
 import menu
 from pymongo import MongoClient
 from helper import helper as h
+from pandas import DataFrame
 
 # Special thanks to RRUFF Project for making their database downloadable
 # in csv format
@@ -254,3 +255,23 @@ class dbManager():
         result = db[collectionName].find_one_and_update(match_this, {'$set': set_this})
         logging.debug(result)
         return result
+
+    #================================================================================
+    #================================================================================
+    @staticmethod
+    def tabulateCollection(collectionName: str, firstN = None) -> list:
+        
+        cursor = db[collectionName].find()
+        list_cursor = list(cursor)
+        df = DataFrame(list_cursor)
+        
+        if firstN == None:
+            print(df.head())
+        else:
+            print((df.head(int(firstN))))
+        id_list = df['_id'].tolist()
+        
+        return id_list
+
+    #================================================================================
+    #================================================================================

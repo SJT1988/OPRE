@@ -477,6 +477,26 @@ class MenuManager:
 
     #================================================================================
     #================================================================================
+    
+    def deleteMineral(self):
+        print('DELETE MINERAL')
+        print()
+
+        id_list = dbM.tabulateCollection('Minerals', 20)
+        
+        print()
+        i = input('Enter the index (not _id) of the Mineral to be deleted\nor press \'ENTER\' to cancel >>> ')
+        print()
+        if not i == '':
+            time.sleep(0.5)
+            dbM.delete_document({'_id': id_list[int(i)]},'Minerals')
+
+        self.stateName='admin menu'
+        self.state = self.states[self.stateName]
+        time.sleep(1)
+        return
+    #================================================================================
+    #================================================================================
     def appendMineral(self):
         #----------------------------------------------------------------------------
         class FormatError(Exception):
@@ -596,6 +616,10 @@ class MenuManager:
         if self.stateName == 'append mineral':
             logging.debug('stateName = append mineral')
             self.appendMineral()
+
+        if self.stateName == 'delete mineral':
+            logging.debug('stateName = delete mineral')
+            self.deleteMineral()
 
         if self.stateName == 'quit':
             logging.debug('stateName = quit')

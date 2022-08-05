@@ -164,3 +164,40 @@ WARNING :: 2022-08-04 15:50:36,596 -- Something went wrong. Try another value.
 INFO :: 2022-08-04 15:50:55,966 -- SUCCESS: added document {'Name': 'Rockium', 'Chemistry': '3452dfad', 'Country': 'xar arar', 'Value': 424.0, '_id': ObjectId('62ec4d4e7dfd2b597c7896a0')} to collection Minerals.
 DEBUG :: 2022-08-04 15:52:32,806 -- stateName = logoff
 INFO :: 2022-08-04 15:52:32,807 -- Logging off...
+DEBUG :: 2022-08-04 16:59:12,166 -- stateName = login
+INFO :: 2022-08-04 16:59:28,136 -- successful login
+INFO :: 2022-08-04 16:59:28,137 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 16:59:33,029 -- stateName = delete mineral
+DEBUG :: 2022-08-04 17:04:52,841 -- stateName = login
+WARNING :: 2022-08-04 17:05:06,040 -- invalid password
+INFO :: 2022-08-04 17:05:07,041 -- failed login
+INFO :: 2022-08-04 17:05:26,197 -- successful login
+INFO :: 2022-08-04 17:05:26,197 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 17:05:30,556 -- stateName = delete mineral
+DEBUG :: 2022-08-04 17:08:07,547 -- stateName = login
+INFO :: 2022-08-04 17:08:25,422 -- successful login
+INFO :: 2022-08-04 17:08:25,423 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 17:08:29,619 -- stateName = delete mineral
+DEBUG :: 2022-08-04 17:11:30,178 -- stateName = login
+INFO :: 2022-08-04 17:11:50,133 -- successful login
+INFO :: 2022-08-04 17:11:50,133 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 17:11:55,843 -- stateName = delete mineral
+DEBUG :: 2022-08-04 17:14:30,607 -- stateName = login
+INFO :: 2022-08-04 17:14:44,045 -- successful login
+INFO :: 2022-08-04 17:14:44,046 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 17:14:46,989 -- stateName = delete mineral
+DEBUG :: 2022-08-04 17:15:39,265 -- stateName = delete mineral
+DEBUG :: 2022-08-04 17:19:49,733 -- stateName = login
+INFO :: 2022-08-04 17:20:07,595 -- successful login
+INFO :: 2022-08-04 17:20:07,596 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 17:20:12,792 -- stateName = delete mineral
+DEBUG :: 2022-08-04 17:53:11,360 -- stateName = login
+INFO :: 2022-08-04 17:53:28,313 -- successful login
+INFO :: 2022-08-04 17:53:28,313 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 17:53:34,981 -- stateName = delete mineral
+DEBUG :: 2022-08-04 17:56:04,602 -- stateName = login
+INFO :: 2022-08-04 17:56:21,634 -- successful login
+INFO :: 2022-08-04 17:56:21,635 -- successful login with credentials ('Daedalus_88', '$uper-Secure64', 'admin').
+DEBUG :: 2022-08-04 17:56:26,616 -- stateName = delete mineral
+INFO :: 2022-08-04 17:56:32,515 -- SUCCESSFULLY deleted document.
+DEBUG :: 2022-08-04 17:57:14,593 -- stateName = delete mineral

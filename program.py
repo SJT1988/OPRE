@@ -57,6 +57,6 @@ if __name__ == '__main__':
     '''
     #dbM.json_to_collection(dbM._users_json_file,'Users')
     #dbM.csv_to_minerals_collection()
-    #helper.clearScreen()
+    h.clearScreen()
     main()
 
