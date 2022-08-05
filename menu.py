@@ -60,6 +60,56 @@ class MenuManager:
 
     #================================================================================
     #================================================================================
+    def specialState(self):
+        if self.stateName == 'login':
+            logging.debug('stateName = login')
+            self.login()
+
+        if self.stateName == 'register':
+            logging.debug('stateName = register')
+            self.register()
+
+        if self.stateName == 'logoff':
+            logging.debug('stateName = logoff')
+            self.logoff()
+
+        if self.stateName == 'buy':
+            logging.debug('stateName = buy')
+            self.buy()
+
+        if self.stateName == 'change user role':
+            logging.debug('stateName = change user role')
+            self.changeUserRole()
+        
+        if self.stateName == 'delete user':
+            logging.debug('stateName = delete user')
+            self.deleteUser()
+
+        if self.stateName == 'append mineral':
+            logging.debug('stateName = append mineral')
+            self.appendMineral()
+
+        if self.stateName == 'delete mineral':
+            logging.debug('stateName = delete mineral')
+            self.deleteMineral()
+
+        if self.stateName == 'add money':
+            logging.debug('stateName = add money')
+            self.addMoney()
+
+        if self.stateName == 'transactions':
+            logging.debug('stateName = transactions')
+            self.transactionHistory()
+
+        if self.stateName == 'quit':
+            logging.debug('stateName = quit')
+            print("Quitting...")
+            time.sleep(1)
+            exit()
+        return
+    
+    #================================================================================
+    #================================================================================
     # validate input
     def validate(self, ans, opt) -> bool:
         if not re.match('^[0-9]*$', ans):
@@ -118,12 +168,14 @@ class MenuManager:
     #================================================================================
     #================================================================================
     def transactionHistory(self):
+
         myRole = dbM._user_credentials[2]
         if myRole == 'admin':
             target_username = input('Enter the user whose transaction history you want to see >>> ')
             transactions = dbM.find_and_return_document('Users', {'username': target_username})['transactions']
             df = DataFrame(transactions)
             print(df)
+            print()
             input('Press any key to continue')
 
             self.stateName = 'admin menu'
@@ -135,6 +187,7 @@ class MenuManager:
             transactions = dbM.find_and_return_document('Users', {'username': target_username})['transactions']
             df = DataFrame(transactions)
             print(df)
+            print()
             input('Press any key to continue')
             self.stateName = 'customer menu'
             self.state = self.states[self.stateName]
@@ -485,8 +538,23 @@ class MenuManager:
 
     #================================================================================
     #================================================================================
+    
     def deleteUser(self):
-        
+        #----------------------------------------------------------------------------
+        def areYouSure(self) -> int:
+            
+            while True:
+                try:
+                    answer = input('Are you sure you want to delete your own account? 1 -> yes, 2 -> no >>> ')
+                    if int(answer) == 1 or answer.lower() == 'yes' or answer.lower() == 'y':
+                        return 1
+                    else:
+                        print('Cancelling...')
+                        return 2
+                except:
+                    logging.info('invalid input. try again.')
+                    print()
+        #----------------------------------------------------------------------------    
         userCredentials = dbM.getUserCredentials()
         thisUser = userCredentials[0]
         deleted_self = False
@@ -500,7 +568,7 @@ class MenuManager:
 
             # if we try to delete ourself, warn us first
             if targetUsername == thisUser:
-                answer = input('Are you sure you want to delete your own account? 1 -> yes, 2 -> no >>> ')
+                answer = areYouSure()
                 
                 if int(answer) == 1:
                     deleted_self = True
@@ -728,6 +796,7 @@ class MenuManager:
                 h.clearScreen
                 self.stateName = 'customer menu'
                 self.state = self.states[self.stateName]
+                h.clearScreen()
                 return
 
             # get mineral name
@@ -772,61 +841,10 @@ class MenuManager:
             'amount': -1*mineral_price
         }
 
-        #dbM.update_field({'_id':ObjectId(user_id)},{'transactions': new_transaction},
-        dbM._db.Users.update_one({'_id':ObjectId(user_id)},{"$push":{'transactions': new_transaction}})
+        #dbM._db.Users.update_one({'_id':ObjectId(user_id)},{"$push":{'transactions': new_transaction}})
+        dbM.update_document('Users',{'_id':ObjectId(user_id)},{"$push":{'transactions': new_transaction}})
 
         time.sleep(1)
         self.stateName='customer menu'
         self.state = self.states[self.stateName]
         return
-
-    #================================================================================
-    #================================================================================
-    def specialState(self):
-        if self.stateName == 'login':
-            logging.debug('stateName = login')
-            self.login()
-
-        if self.stateName == 'register':
-            logging.debug('stateName = register')
-            self.register()
-
-        if self.stateName == 'logoff':
-            logging.debug('stateName = logoff')
-            self.logoff()
-
-        if self.stateName == 'buy':
-            logging.debug('stateName = buy')
-            self.buy()
-
-        if self.stateName == 'change user role':
-            logging.debug('stateName = change user role')
-            self.changeUserRole()
-        
-        if self.stateName == 'delete user':
-            logging.debug('stateName = delete user')
-            self.deleteUser()
-
-        if self.stateName == 'append mineral':
-            logging.debug('stateName = append mineral')
-            self.appendMineral()
-
-        if self.stateName == 'delete mineral':
-            logging.debug('stateName = delete mineral')
-            self.deleteMineral()
-
-        if self.stateName == 'add money':
-            logging.debug('stateName = add money')
-            self.addMoney()
-
-        if self.stateName == 'transactions':
-            logging.debug('stateName = transactions')
-            self.transactionHistory()
-
-        if self.stateName == 'quit':
-            logging.debug('stateName = quit')
-            print("Quitting...")
-            time.sleep(1)
-            exit()
-        return
-            

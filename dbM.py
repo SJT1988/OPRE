@@ -16,7 +16,6 @@ db = client.get_database('project01')
 class dbManager():
 
     # class variables:
-    _db = db
     _user_credentials = None #(userName,password,role)
     _minerals_csv_file = 'RRUFF_Export_20220731_223900.csv'
     _users_json_file = 'users.json'
@@ -232,11 +231,11 @@ class dbManager():
 
     #================================================================================
     #================================================================================
-    # @staticmethod
-    # def update_document(collectionName: str, query: dict, update_or_override: dict):
-    #     result = db[collectionName].update_one(query, {"$set": update_or_override})
-    #     logging.info(result)
-    #     return result
+    # wrapper for collection.update_one()
+    @staticmethod
+    def update_document(collectionName: str, query: dict, update_or_override: dict):
+        db[collectionName].update_one(query, update_or_override)
+        return
 
     #================================================================================
     #================================================================================
@@ -292,7 +291,6 @@ class dbManager():
     def dataframeFromDict(data: dict, first_n_docs = None):
         
         df = DataFrame.from_dict(data, index=0)
-        
         return df
 
     #================================================================================
@@ -305,7 +303,7 @@ class dbManager():
         list_cursor = list(cursor)
         df = DataFrame(list_cursor)
         
-        return df_list
+        return df
     #================================================================================
     #================================================================================
     @staticmethod
